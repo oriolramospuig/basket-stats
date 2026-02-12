@@ -34,20 +34,23 @@ export async function GET(request: NextRequest) {
 
     const comparisons = await Promise.all(
       userIdArray.map(async (userId) => {
-        const result = await db.execute(`
-          SELECT 
-            u.id as user_id,
-            u.display_name,
-            COUNT(s.id) as total_sessions,
-            COALESCE(SUM(s.free_throws_made), 0) as total_free_throws_made,
-            COALESCE(SUM(s.free_throws_attempted), 0) as total_free_throws_attempted,
-            COALESCE(SUM(s.three_pointers_made), 0) as total_three_pointers_made,
-            COALESCE(SUM(s.three_pointers_attempted), 0) as total_three_pointers_attempted
-          FROM users u
-          LEFT JOIN shooting_sessions s ON u.id = s.user_id ${dateFilter ? dateFilter.replace('AND', 'AND') : ''}
-          WHERE u.id = ?
-          GROUP BY u.id, u.display_name
-        `, { args: [userId] });
+        const result = await db.execute({
+          sql: `
+            SELECT 
+              u.id as user_id,
+              u.display_name,
+              COUNT(s.id) as total_sessions,
+              COALESCE(SUM(s.free_throws_made), 0) as total_free_throws_made,
+              COALESCE(SUM(s.free_throws_attempted), 0) as total_free_throws_attempted,
+              COALESCE(SUM(s.three_pointers_made), 0) as total_three_pointers_made,
+              COALESCE(SUM(s.three_pointers_attempted), 0) as total_three_pointers_attempted
+            FROM users u
+            LEFT JOIN shooting_sessions s ON u.id = s.user_id ${dateFilter ? dateFilter.replace('AND', 'AND') : ''}
+            WHERE u.id = ?
+            GROUP BY u.id, u.display_name
+          `,
+          args: [userId]
+        });
 
         if (result.rows.length === 0) {
           return null;
