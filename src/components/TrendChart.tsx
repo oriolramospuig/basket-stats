@@ -55,7 +55,7 @@ export default function TrendChart({ data, title = 'Evolución del Porcentaje de
           <XAxis dataKey="date" />
           <YAxis domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
           <Tooltip
-            formatter={(value: number) => [`${value}%`, '']}
+            formatter={(value) => [`${value}%`, '']}
             labelFormatter={(label) => `Fecha: ${label}`}
           />
           <Legend />
