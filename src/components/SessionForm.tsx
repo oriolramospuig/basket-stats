@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from './AuthProvider';
 import { User } from '@/lib/types';
+import { toast } from 'sonner';
 
 interface SessionFormProps {
   onSuccess?: () => void;
@@ -73,6 +74,7 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
       }
 
       setSuccess('¡Sesión registrada correctamente!');
+      toast.success('¡Sesión registrada!');
       setFormData({
         user_id: user?.id.toString() || '',
         session_date: new Date().toISOString().split('T')[0],
@@ -88,6 +90,7 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
       }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Error al guardar la sesión');
+      toast.error('Error al guardar la sesión');
     } finally {
       setLoading(false);
     }
@@ -102,15 +105,15 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
 
   if (!user) {
     return (
-      <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 text-yellow-800">
+      <div className="bg-yellow-50 dark:bg-yellow-900/30 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 text-yellow-800 dark:text-yellow-300">
         <p>Debes iniciar sesión para registrar una sesión de tiro.</p>
       </div>
     );
   }
 
   return (
-    <form onSubmit={handleSubmit} className="bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-xl font-bold text-gray-800 mb-4">📝 Registrar Sesión</h2>
+    <form onSubmit={handleSubmit} className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6">
+      <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">📝 Registrar Sesión</h2>
 
       {error && (
         <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
@@ -127,7 +130,7 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* User selector */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Jugador
           </label>
           <select
@@ -135,7 +138,7 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
             value={formData.user_id}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-700 dark:text-gray-200 min-h-[44px]"
           >
             <option value="">Seleccionar jugador</option>
             {users.map((u) => (
@@ -148,7 +151,7 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
 
         {/* Date */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Fecha
           </label>
           <input
@@ -157,13 +160,13 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
             value={formData.session_date}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-700 dark:text-gray-200 min-h-[44px]"
           />
         </div>
 
         {/* Free throws */}
         <div className="col-span-full">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             🎯 Tiros Libres
           </label>
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
@@ -175,10 +178,10 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
                 onChange={handleChange}
                 min="0"
                 placeholder="Anotados"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-700 dark:text-gray-200 min-h-[44px]"
               />
             </div>
-            <span className="text-gray-500 text-lg font-medium">/</span>
+            <span className="text-gray-500 dark:text-gray-400 text-lg font-medium">/</span>
             <div>
               <input
                 type="number"
@@ -187,7 +190,7 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
                 onChange={handleChange}
                 min="0"
                 placeholder="Intentados"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-700 dark:text-gray-200 min-h-[44px]"
               />
             </div>
           </div>
@@ -195,7 +198,7 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
 
         {/* Three pointers */}
         <div className="col-span-full">
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
             🏀 Triples
           </label>
           <div className="grid grid-cols-[1fr_auto_1fr] items-center gap-2">
@@ -207,10 +210,10 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
                 onChange={handleChange}
                 min="0"
                 placeholder="Anotados"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-700 dark:text-gray-200 min-h-[44px]"
               />
             </div>
-            <span className="text-gray-500 text-lg font-medium">/</span>
+            <span className="text-gray-500 dark:text-gray-400 text-lg font-medium">/</span>
             <div>
               <input
                 type="number"
@@ -219,7 +222,7 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
                 onChange={handleChange}
                 min="0"
                 placeholder="Intentados"
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+                className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-700 dark:text-gray-200 min-h-[44px]"
               />
             </div>
           </div>
@@ -227,7 +230,7 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
 
         {/* Notes */}
         <div className="col-span-full">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
+          <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
             Notas (opcional)
           </label>
           <textarea
@@ -236,7 +239,7 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
             onChange={handleChange}
             rows={2}
             placeholder="Ej: Buen día, viento fuerte, etc."
-            className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-700 dark:text-gray-200"
           />
         </div>
       </div>
@@ -244,7 +247,7 @@ export default function SessionForm({ onSuccess }: SessionFormProps) {
       <button
         type="submit"
         disabled={loading}
-        className="mt-4 w-full bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 transition disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+        className="mt-4 w-full bg-orange-600 text-white py-3 px-4 rounded-md hover:bg-orange-700 transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed font-medium min-h-[48px]"
       >
         {loading ? 'Guardando...' : 'Guardar Sesión'}
       </button>

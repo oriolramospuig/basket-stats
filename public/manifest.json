@@ -1,0 +1,24 @@
+{
+  "name": "Basket Stats - Estadísticas de Tiro",
+  "short_name": "Basket Stats",
+  "description": "Registra y analiza tus estadísticas de tiro de baloncesto",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f9fafb",
+  "theme_color": "#ea580c",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

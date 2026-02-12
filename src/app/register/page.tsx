@@ -37,17 +37,17 @@ function RegisterForm() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900 flex items-center justify-center px-4">
       <div className="max-w-md w-full">
         <div className="text-center mb-8">
           <span className="text-6xl">🏀</span>
-          <h1 className="mt-4 text-3xl font-bold text-gray-900">Basket Stats</h1>
-          <p className="mt-2 text-gray-600">Crea tu cuenta</p>
+          <h1 className="mt-4 text-3xl font-bold text-gray-900 dark:text-gray-100">Basket Stats</h1>
+          <p className="mt-2 text-gray-600 dark:text-gray-400">Crea tu cuenta</p>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-lg shadow-md p-8"
+          className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 sm:p-8"
         >
           {error && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
@@ -58,7 +58,7 @@ function RegisterForm() {
           <div className="mb-4">
             <label
               htmlFor="displayName"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               Nombre (cómo te mostrarás)
             </label>
@@ -68,7 +68,7 @@ function RegisterForm() {
               value={displayName}
               onChange={(e) => setDisplayName(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-700 dark:text-gray-200 min-h-[44px]"
               placeholder="Ej: Juan García"
             />
           </div>
@@ -76,7 +76,7 @@ function RegisterForm() {
           <div className="mb-4">
             <label
               htmlFor="username"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               Usuario (para iniciar sesión)
             </label>
@@ -87,7 +87,7 @@ function RegisterForm() {
               onChange={(e) => setUsername(e.target.value)}
               required
               minLength={3}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-700 dark:text-gray-200 min-h-[44px]"
               placeholder="Ej: juan123"
             />
           </div>
@@ -95,7 +95,7 @@ function RegisterForm() {
           <div className="mb-4">
             <label
               htmlFor="password"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               Contraseña
             </label>
@@ -106,7 +106,7 @@ function RegisterForm() {
               onChange={(e) => setPassword(e.target.value)}
               required
               minLength={6}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-700 dark:text-gray-200 min-h-[44px]"
               placeholder="Mínimo 6 caracteres"
             />
           </div>
@@ -114,7 +114,7 @@ function RegisterForm() {
           <div className="mb-6">
             <label
               htmlFor="confirmPassword"
-              className="block text-sm font-medium text-gray-700 mb-1"
+              className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1"
             >
               Confirmar contraseña
             </label>
@@ -124,7 +124,7 @@ function RegisterForm() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+              className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500 bg-white dark:bg-gray-700 dark:text-gray-200 min-h-[44px]"
               placeholder="Repite tu contraseña"
             />
           </div>
@@ -132,12 +132,12 @@ function RegisterForm() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full bg-orange-600 text-white py-2 px-4 rounded-md hover:bg-orange-700 transition disabled:opacity-50 disabled:cursor-not-allowed font-medium"
+            className="w-full bg-orange-600 text-white py-3 px-4 rounded-md hover:bg-orange-700 transition-all duration-150 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed font-medium min-h-[48px]"
           >
             {loading ? 'Creando cuenta...' : 'Crear cuenta'}
           </button>
 
-          <p className="mt-4 text-center text-gray-600">
+          <p className="mt-4 text-center text-gray-600 dark:text-gray-400">
             ¿Ya tienes cuenta?{' '}
             <Link href="/login" className="text-orange-600 hover:underline">
               Inicia sesión
@@ -146,7 +146,7 @@ function RegisterForm() {
         </form>
 
         <p className="mt-4 text-center">
-          <Link href="/" className="text-gray-500 hover:text-gray-700">
+          <Link href="/" className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
             ← Volver al inicio
           </Link>
         </p>
