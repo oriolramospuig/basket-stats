@@ -55,7 +55,7 @@ export default function CompareChart({ data }: CompareChartProps) {
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="name" />
           <YAxis domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
-          <Tooltip formatter={(value: number) => [`${value}%`, '']} />
+          <Tooltip formatter={(value) => [`${value}%`, '']} />
           <Legend />
           <Bar dataKey="Tiros Libres" fill="#3b82f6" />
           <Bar dataKey="Triples" fill="#10b981" />
